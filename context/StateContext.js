@@ -1,7 +1,20 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
-const Context = createContext();
+export const themes = {
+  light: {
+    color: 'black',
+    background: 'white',
+  },
+
+  dark: {
+    color: 'white',
+    background: 'black',
+  },
+};
+
+const initialState = { theme: themes.light };
+const Context = createContext(initialState);
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
@@ -9,9 +22,13 @@ export const StateContext = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+  const [theme, setTheme] = useState(themes.light);
 
   let foundProduct;
-  let index;
+
+  const toggleTheme = () => {
+    setTheme(theme === themes.light ? themes.dark : themes.light);
+  };
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
@@ -40,9 +57,7 @@ export const StateContext = ({ children }) => {
 
   const toggeleCartItemQuantity = (id, value) => {
     foundProduct = cartItems.find((product) => product._id === id);
-    console.log('foundProduct', foundProduct);
 
-    // index = cartItems.findIndex((product) => product._id == id);
     const newCartItems = cartItems.filter((item) => item._id !== id);
 
     if (value === 'inc') {
@@ -68,7 +83,6 @@ export const StateContext = ({ children }) => {
 
   const onRemove = (product) => {
     foundProduct = cartItems.find((prod) => prod._id === product._id);
-    console.log();
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
     setTotalPrice((prev) => prev - foundProduct.price * foundProduct.quantity);
     setTotalQuantities((prev) => prev - foundProduct.quantity);
@@ -102,6 +116,9 @@ export const StateContext = ({ children }) => {
         setCartItems,
         setTotalPrice,
         setTotalQuantities,
+        toggleTheme,
+        theme,
+        setTheme,
       }}
     >
       {children}

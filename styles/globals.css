@@ -53,6 +53,10 @@ a {
   font-weight: 600;
 }
 
+.switch {
+  display: flex;
+  gap: 40px;
+}
 .cart-icon:hover {
   transform: scale(1.1, 1.1);
 }

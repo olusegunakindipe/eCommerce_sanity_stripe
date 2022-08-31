@@ -1,7 +1,12 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-node_modules
 /.pnp
 .pnp.js
 .env
@@ -31,3 +36,8 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+.vercel
+
+# Sentry
+.sentryclirc

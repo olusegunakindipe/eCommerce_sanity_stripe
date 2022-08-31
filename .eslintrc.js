@@ -1,4 +1,7 @@
+const webpack = require('webpack');
+
 const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
+
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {

@@ -1,22 +1,15 @@
-module.exports = function(...args) {
-  let original = require('./next.config.original.1661529269710.js');
-  const finalConfig = {};
-  const target = { target: 'serverless' };
-  if (typeof original === 'function' && original.constructor.name === 'AsyncFunction') {
-    // AsyncFunctions will become promises
-    original = original(...args);
-  }
-  if (original instanceof Promise) {
-    // Special case for promises, as it's currently not supported
-    // and will just error later on
-    return original
-      .then((originalConfig) => Object.assign(finalConfig, originalConfig))
-      .then((config) => Object.assign(config, target));
-  } else if (typeof original === 'function') {
-    Object.assign(finalConfig, original(...args));
-  } else if (typeof original === 'object') {
-    Object.assign(finalConfig, original);
-  }
-  Object.assign(finalConfig, target);
-  return finalConfig;
-}
+const { withSentryConfig } = require('@sentry/nextjs');
+
+const moduleExports = {
+  // Your existing module.exports
+};
+
+const sentryWebpackPluginOptions = {
+  silent: true, // Suppresses all logs
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options.
+};
+
+// Make sure adding Sentry options is the last code to run before exporting, to
+// ensure that your source maps include changes from all other Webpack plugins
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);

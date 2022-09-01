@@ -1,8 +1,9 @@
 import Stripe from 'stripe';
+import { withSentry } from '@sentry/nextjs';
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method === 'POST') {
     const cartItems = req.body;
     try {
@@ -55,3 +56,5 @@ export default async function handler(req, res) {
     res.status(405).end('Method Not Allowed');
   }
 }
+
+export default withSentry(handler);

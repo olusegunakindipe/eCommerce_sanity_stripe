@@ -16,9 +16,16 @@ const HeroBanner = ({ heroBanner }) => {
           height="50px"
         />
         <div>
-          <Link href={`/products/${heroBanner.product}`}>
-            <button type="button">{heroBanner.buttonText}</button>
-          </Link>
+          {/* <Link href={`/product/${heroBanner.product}`}> */}
+          <button
+            type="button"
+            onClick={() => {
+              throw new Error('Sentry Error Test');
+            }}
+          >
+            {heroBanner.buttonText}
+          </button>
+          {/* </Link> */}
         </div>
         <div className="desc">
           <h5>Description</h5>

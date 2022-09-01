@@ -19,6 +19,19 @@ module.exports = {
     ecmaVersion: 9,
     sourceType: 'module',
   },
+  rules: {
+    'no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
+    'eol-last': ['error', 'always'],
+    'react/display-name': 'off',
+    'react/prop-types': 'off',
+    'no-prototype-builtins': 'off',
+  },
   plugins: ['react'],
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
 };

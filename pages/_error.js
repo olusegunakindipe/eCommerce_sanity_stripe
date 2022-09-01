@@ -1,3 +1,5 @@
+import React from 'react';
+
 import * as Sentry from '@sentry/nextjs';
 import NextErrorComponent from 'next/error';
 

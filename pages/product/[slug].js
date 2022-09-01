@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { client, urlFor } from '../../lib/client';
 import {
   AiFillStar,
@@ -11,8 +11,7 @@ import { useStateContext } from '../../context/StateContext';
 const ProductDetails = ({ product, products }) => {
   const [index, setIndex] = useState(0);
   const { image, name, details, price } = product;
-  const { decQty, incQty, qty, onAdd, setShowCart, cartItems } =
-    useStateContext();
+  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
 
   const handleBuyNow = () => {
     setShowCart(true);
